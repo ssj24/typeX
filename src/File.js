@@ -1,5 +1,7 @@
 import React, {useState, useEffect, useRef, useCallback} from 'react';
-import upload from './upload.png';
+import upload from './assets/upload.png';
+import left from './assets/left-arrow.png';
+import right from './assets/right-arrow.png';
 
 const File = (props) => {
   const max = 10737418240; // 10GB
@@ -19,12 +21,11 @@ const File = (props) => {
     dragRef.current.appendChild(div);
   }
   const uploadedFileEl = (files) => {
-    files.map(f => {
+    for (const f of files) {
       return attachEl(f);
-    })
+    }
   }
   const fileHandler = (file) => {
-    console.log([...props.file]);
     attachEl(file)
     props.fileHandler([...props.file, file]);
   }
@@ -170,6 +171,7 @@ const File = (props) => {
                     e.preventDefault();
                     props.stepHandler(1);
                   }} className="btn prev">
+            <img className="left" src={left} alt="left"></img>
             이전으로
           </button>
           <button onClick={(e) => {
@@ -179,6 +181,7 @@ const File = (props) => {
                   className="btn next"
                   disabled={props.verified[2] ? "" : true}>
             다음으로
+            <img className="right" src={right} alt="right"></img>
           </button>
         </div>
       </div>

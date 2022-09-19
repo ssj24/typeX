@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import right from './assets/right-arrow.png';
 
 const Info = (props) => {
   const [name, setName] = useState(props.info.name);
@@ -156,6 +157,7 @@ const Info = (props) => {
                   value="submit"
                   disabled={props.verified[1] ? "" : true}>
             다음으로
+            <img className="right" src={right} alt="right" />
           </button>
         </div>
       </form>

@@ -3,7 +3,7 @@ import Info from './Info';
 import File from './File';
 import Confirm from './Confirm';
 import Tabs from './Tabs';
-import won from './won.png';
+import won from './assets/won.png';
 
 const Form = (props) => {
   const [step, setStep] = useState(0);
@@ -32,7 +32,7 @@ const Form = (props) => {
     <Tabs verified={verified} step={step} />,
     <Info verified={verified} info={info} stepHandler={setStep} infoHandler={setInfo} verifiedHandler={setVerified} />,
     <File verified={verified} file={file} total={total} stepHandler={setStep} totalHandler={setTotal} fileHandler={setFile} />,
-    <Confirm info={info} file={file} verified={verified} stepHandler={setStep} verifiedHandler={setVerified} />
+    <Confirm verified={verified} info={info} file={file} stepHandler={setStep} verifiedHandler={setVerified} />
   ];
 
   return (

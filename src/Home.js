@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Form from './Form';
 import Nav from './Nav';
-import logo from './logo.png';
+import logo from './assets/logo.png';
 
 const Home = () => {
   const [disp, setDisp] = useState(true);
