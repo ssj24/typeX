@@ -13,6 +13,7 @@ const File = (props) => {
     div.classList = "fileName";
     let a = document.createElement("a");
     a.href = file.link;
+    a.setAttribute('download', file.name);
     a.innerHTML = file.name;
     let span = document.createElement("span");
     span.innerHTML = file.unit;
@@ -26,18 +27,14 @@ const File = (props) => {
     }
   }
   const fileHandler = (file) => {
-    attachEl(file)
-    props.fileHandler([...props.file, file]);
+    attachEl(file);
+    return props.fileHandler([...props.file, file]);
   }
   useEffect(() => {
     uploadedFileEl(props.file);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // useEffect(() => {
-  //   props.totalHandler(size);
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [size]);
   const fileErr = () => {
     alert(`파일 크기를 확인해주세요`);
   }
@@ -53,10 +50,10 @@ const File = (props) => {
       }
       let objUrl = URL.createObjectURL(file);
       video.src = objUrl;
+      
       if (file.size < 1024*1024) sizeUnit = Math.round(file.size / 1024) + "KB";
       else if (file.size < 1024*1024*1024) sizeUnit = Math.round(file.size / (1024*1024)) + "MB";
       else if (file.size < 1024*1024*1024*1024) sizeUnit = Math.round(file.size / (1024*1024*1024)) + "GB";
-
       video.onloadeddata = () => {
         fileHandler({
           name: file.name,
@@ -65,6 +62,7 @@ const File = (props) => {
           link: objUrl,
           duration: video.duration
         });
+        window.URL.revokeObjectURL(video.src);
       }
     }
   }
@@ -152,11 +150,13 @@ const File = (props) => {
         <label className={isDragging ? "dragFile dragging" : "dragFile"}
                id="targetLabel"
                htmlFor="fileDrag" ref={dragRef}>
-          {props.file.length ? "" : (<p className="secP">
-            <img src={upload} alt="upload" />
-            업로드한 파일이 없습니다.
-            드래그하여 파일을 추가하세요.
-          </p>)}
+          {props.file.length ? "" : (
+            <p className="secP">
+              <img src={upload} alt="upload" />
+              업로드한 파일이 없습니다.
+              드래그하여 파일을 추가하세요.
+            </p>
+          )}
         </label>
         <p className="sizeP">
           {(props.total < 1024*1024) ? Math.round(props.total / 1024) + "KB " :

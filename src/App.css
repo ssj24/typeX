@@ -347,6 +347,9 @@ table.checkbox .lastCheckbox input[type="text"] {
   flex-direction: column;
   cursor: pointer;
 }
+.dragFile.dragginf {
+  background-color: var(--point);
+}
 .dragFile .secP {
   width: 400px;
   display: flex;
