@@ -36,7 +36,7 @@ const Form = (props) => {
   ];
 
   return (
-    <div className="wrapper formWrapper">
+    <div className="formWrapper">
       
       {step ? stepList[0] : ""}
       {step ? stepList[step] :
